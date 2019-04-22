@@ -1,24 +1,26 @@
 #!/bin/bash
 ##depth=5
 #breadth=2
-directory=$PWD
-#DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-echo "Olusturmak istediginiz dizin sayisini giriniz ! "
+echo "Kaç dizin olusturdunuz ? "
 read dizin_Sayisi
 
+echo "Degistirmek istediginiz kelimeyi yaziniz : "
+read kelime
+
+echo "Yerine koymak istediginiz kelimeyi yaziniz : "
+read kelime1
 script_Mkdir_Func(){
+
 declare -i level=$1
 declare -i childNo=$(($2+1))
 declare -i i=0
 declare -i breadth=$(($level+2))
-
     		if (( $level < $dizin_Sayisi ));then
-
-        	mkdir -p "$childNo" && touch "dosya""$childNo" && cat $directory/meyveler >> "dosya""$childNo"
+        	sed -i s/$kelime/$kelime1/g "dosya"$childNo
         	cd "$childNo"
-        	let level++
-
+               	let level++
+		
 
         		while [ $i -lt $breadth ]
         		do
@@ -30,3 +32,7 @@ declare -i breadth=$(($level+2))
 }
 script_Mkdir_Func 0 0
 
+
+
+
+#DFS ağacı oluşturma algoritması ile tasarlanmıştır.
